@@ -9,4 +9,5 @@ export interface ISelectButton {
   optionValue?: string;
   handleChange?: (data: any) => void;
   fieldType?: "top-label" | "no-label";
+  allowEmpty?: boolean;
 }
