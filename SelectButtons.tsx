@@ -10,6 +10,7 @@ export const SelectButtons = (props: ISelectButton) => {
     attribute,
     form,
     fieldType,
+    handleChange,
     optionLabel = "label",
     optionValue = "value",
     allowEmpty = false,
@@ -75,6 +76,7 @@ export const SelectButtons = (props: ISelectButton) => {
               allowEmpty={allowEmpty}
               onChange={(e) => {
                 field.onChange(e.value);
+                handleChange && handleChange(e.value);
               }}
             />
           )}
