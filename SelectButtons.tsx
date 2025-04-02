@@ -4,6 +4,7 @@ import { SelectButton } from "primereact/selectbutton";
 import { ISelectButton } from "./selectButton.model";
 import { IFormFieldType } from "../../../../library/utilities/constant";
 import { FormFieldError } from "../formFieldError/FormFieldError";
+import { useMemo } from "react";
 
 export const SelectButtons = (props: ISelectButton) => {
   const {
@@ -22,32 +23,23 @@ export const SelectButtons = (props: ISelectButton) => {
     formState: { errors },
   } = useFormContext();
 
-  const getClassNames = () => {
-    let labelClassName = "";
-    let fieldClassName = "";
-    let divClassName = "";
-
+  const { labelClassName, fieldClassName, divClassName } = useMemo(() => {
     switch (fieldType) {
       case IFormFieldType.NO_LABEL:
-        labelClassName = "";
-        fieldClassName = "field p-fluid";
-        divClassName = "";
-        break;
       case IFormFieldType.TOP_LABEL:
-        labelClassName = "";
-        fieldClassName = "field p-fluid";
-        divClassName = "";
-        break;
+        return {
+          labelClassName: "",
+          fieldClassName: "field p-fluid",
+          divClassName: "",
+        };
       default:
-        labelClassName = "col-12 md:col-3 md:mb-0";
-        fieldClassName = "field grid flex-nowrap";
-        divClassName = "flex flex-column px-2";
-        break;
+        return {
+          labelClassName: "col-12 md:col-3 md:mb-0",
+          fieldClassName: "field grid flex-nowrap",
+          divClassName: "flex flex-column px-2",
+        };
     }
-
-    return { labelClassName, fieldClassName, divClassName };
-  };
-  const { labelClassName, fieldClassName, divClassName } = getClassNames();
+  }, [fieldType]);
 
   const labelElement = (
     <label htmlFor={attribute} className={labelClassName}>
